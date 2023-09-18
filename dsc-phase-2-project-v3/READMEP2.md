@@ -1,6 +1,7 @@
 # Analayzing Movie Data from IMBD
 
 # Overview
+The prupose of this project was to assess historical movie box office data to recommend a course of strategy for a new entrant in the film industry. We wanted to understand which kinds of movie studios performed best at the box office, and what characteristics these studios embodied, and whether or not seasonality affected box office success. 
 
 This project involves comprehensive tasks such as analyzing datasets from the IMBD that were shared in zip file. We had to unpack the tables of the sql file and then merge several tables together. Then we sorted through the data to find the best movies for each genre. Our primary objective was to be able to present these best movies to a company so they can research the best directors from the data and study how they made their mission come to fruition. 
 
@@ -9,7 +10,9 @@ This project involves comprehensive tasks such as analyzing datasets from the IM
 The main objective was to explore opportunities within the film industry. There were multiple datasets and one of primary focus was the IMBD as a SQL. From this SQL it was essential to filter the data for the best movies and then make recommendations to the new film company about what conclusions we can draw from the best movies we find. 
 
 Below are the primary business questions:
-
+Which studios perform best a the box office?
+WHat characteristics to these studios embody?
+Does seasonality affect box office performance?
 
 # Data Understanding and Analysis
 
@@ -38,6 +41,28 @@ runtime_minutes
 genres
 averagerating
 numvotes
+
+We also created a secondary dataframe by merging movie budget data, movie gross data, and the genre columns from the IMDB ERD to develop a dataframe with 13,601 entries and 27 columns. Each entry was a movie, and the most important columns were:
+
+title                            
+production_budget                 
+domestic_gross                    
+worldwide_gross                   
+studio                           
+foreign_gross                     
+year                     
+release_date             
+vote_average                    
+vote_count                        
+profit_margin                     
+percent_profit                         
+release_month                     
+profitable                                
+start_year                        
+runtime_minutes               
+genres          
+
+The columns profit_margin and percent_profit were created from worldwide_gross and production_budget.
 
 # Dropped Columns 
 
@@ -73,6 +98,12 @@ The x-axis on the bar graph for movies represents the primary name of the top 5 
 
 For the movie directors, the bar graph is designed with a column created to calculate the average of the averagerating column. This created column is the y-axis for the director bar graph because it provides an average of the averagerating for all movies that specific director is credited for.
 
+We wanted to examine the most successful studios to better understand characteristics of success in order to make recommendations to our client. To do this, we used the secondary dataset of movies and box office data and calculated a new column called 'percent_profit.' From some external research, we learned that on average, movie studios keep around 50% of box office revenue, while the distributors (theaters) keep the remaining 50%. We also learned that movies incur additional print, advertising, and marketing costs when promoting a new release that are not accounted for in the production budget. For some films, these additional costs can make up to half of the films production budget. 
+
+Therefore, we filtered the secondary box office table to only include films that achieved more than 50% percent profit, and focused on films that achieved more than 75% percent profit to account for any additional marketing and advertising expenses. When we examined the distribution of studios that achieved better than 75% profits, we noticed 7 studios (and generally that smaller production companies, like IFC, A24, and Blumhouse Tilt) optimized best for percent profit while keeping production costs relatively low. 
+
+We then examined the most common genres that these 7 studios produced films in and noticed that Drama, Comedy, and Horror comprised significant proportions of their most profitable films. We also examined the spread of runtime, and noticed that the median runtime was somewhere between 90 and 105 minutes. Furthermore, when examining the distribtuon of profitability for films that were more than 50% profitable, we noticed that June, July and October saw the best performance in terms of percent profitability.  
+
 ## Recommendations
 
 Based on the results from the filtered data, created column for average of the average rating, and the bar graphs for best movies and best directors, we have found some ideal recommendations: 
@@ -88,5 +119,10 @@ Produced by: Marcus Damone Henry(8.9), Kaushik Ganguly(9.0), Larry Rosen(9.0), L
 Comedy: Big Weekend(9.1), Love in a Coffee Shop(8.8), Filme B - O Vampiro da Paulista(9.2), Mr Pickpocket(8.7), Yeh Suhaagraat Impossible (9.6)
 
 Produced by: Mike Lordi(8.95), Mike Lordi(8.95), Beto Ribeiro(9.15), Pablo D'Stair(8.95), Abhinav Thakur(9.6)
+
+We also recommend that a new entrant to the film industry model their creative stuctures on A24, IFC, and Blumhouse Tilt. All of these studios produce films for less than $10 million and have a median runtime of between 92 and 106 minutes. We recommend that our client focus on Drama, Comedy, and Horror, and to target release dates between late summer and early fall (particularly October). We recommend that our clients partner with smaller, independent theaters to negotiate better box office cuts, and that they hire smaller, social-media focused marketing agencies that leverage virality to minimize marketing costs. 
+
+For future analysis, we would like to incorporate data that captures video on demand, streaming, and television revenue, investigate and incorporate retail and merchandising data to assess opportunities for future cash flow, and to look for creatives who work in the styles of the highest rated writers and directors previously identified. 
+
 
 -- 
